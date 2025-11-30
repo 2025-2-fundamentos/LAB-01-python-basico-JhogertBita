@@ -15,3 +15,21 @@ def pregunta_05():
     [('A', 9, 2), ('B', 9, 1), ('C', 9, 0), ('D', 8, 3), ('E', 9, 1)]
 
     """
+    with open("files/input/data.csv", "r") as file:
+        lineas = file.readlines()
+    Valores = {}
+    for linea in lineas:
+        partes = linea.strip().split("\t")
+        letra = partes[0]
+        valor = int(partes[1])
+
+        if letra in Valores:
+            Valores[letra].append(valor)
+        else:
+            Valores[letra] = [valor]
+    resultado = []
+    for letra in sorted(Valores.keys()):
+        maximo_valor = max(Valores[letra])
+        minimo_valor = min(Valores[letra])
+        resultado.append((letra, maximo_valor, minimo_valor))
+    return resultado
