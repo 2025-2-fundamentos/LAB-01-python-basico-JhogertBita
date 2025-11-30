@@ -15,3 +15,20 @@ def pregunta_12():
     {'A': 177, 'B': 187, 'C': 114, 'D': 136, 'E': 324}
 
     """
+    with open("files/input/data.csv", "r") as file:
+            lineas = file.readlines()
+
+    suma_por_letra = {}
+
+    for linea in lineas:
+        partes = linea.strip().split("\t")
+        letra = partes [0]
+        columna_5 = partes [4].split(",")
+
+        suma_columna_5 = sum(int(valor.split(":") [1] ) for valor in columna_5)
+
+        if letra not in suma_por_letra:
+            suma_por_letra[letra] = 0
+        suma_por_letra[letra] += suma_columna_5
+
+    return suma_por_letra
