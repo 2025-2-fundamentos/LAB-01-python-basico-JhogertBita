@@ -1,3 +1,4 @@
+
 """
 Escriba el codigo que ejecute la accion solicitada en cada pregunta. Los
 datos requeridos se encuentran en el archivo data.csv. En este laboratorio
@@ -24,3 +25,19 @@ def pregunta_09():
      'jjj': 18}}
 
     """
+    with open("files/input/data.csv", "r") as file:
+            lineas = file.readlines()
+
+    counter = {}
+
+    for linea in lineas:
+        partes = linea.strip().split("\t")
+        columna_5 = partes[4]
+        pares = columna_5.split(",")
+        for par in pares:
+            clave, _ = par.split(":")
+            if clave not in counter:
+                counter[clave] = 0
+            counter[clave] += 1
+
+    return dict(sorted(counter.items()))
